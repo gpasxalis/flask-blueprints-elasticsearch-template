@@ -7,7 +7,6 @@ def create_app():
 	
 	app = Flask(__name__)
 		
-		
 	# configure elastic
 	es.init_app(app)
 	
@@ -18,8 +17,8 @@ def create_app():
 	from .views import blueprints
 	for bp in blueprints:
 		app.register_blueprint(bp,url_prefix=APP_URL_PREFIX)
-		
-		
+
+
 	return app
 
 	
