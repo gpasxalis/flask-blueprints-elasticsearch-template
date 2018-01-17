@@ -15,7 +15,8 @@ def index_page():
 	#return  render_template('index_page.html')
 	if request.method == "POST":
 		text1 = request.form["test"]
-		return redirect(url_for("hello2.test", test=text1))
+		text2 = request.form["test1"]
+		return redirect(url_for("hello2.test", test=text1, test1=text2))
 	else:
 		return render_template("index_page.html")
 	
