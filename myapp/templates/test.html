@@ -6,15 +6,49 @@
 <body>
 <h1>{{ test }}!</h1>
 <h2> {{ test1 }}</h2>
-{% if test == "Index100" %}
-YAY
-{% else %}
-Nooo
-{% endif %}
 
 {% if res %}
 <h1>YAY! RES!</h1>
-<h2>-- {{res}} --</h2>
+<!-- <h2>-- {{res}} --</h2> -->
+
+{% for hit in res['hits']['hits'] %}
+
+{{hit['_source']['value']}} <br>
+
+{% endfor %}
+
+<!--
+<table class="table">
+    <thead>
+      <tr>
+        <th>Tag</th>
+        <th>Data</th>
+      </tr>
+    </thead>
+	
+{% for hit in res['hits']['hits'] %}
+{% for doc in hit['_source']['datagroup'] %}
+<h3>  {{doc['record']}}</h3>
+
+<tbody>
+      <tr>
+        <th scope="row">{{doc['record']}}</th>
+          <td>{{ hit['value'] }}</td>
+      </tr>
+    </tbody>
+
+
+
+{% endfor %} 
+{% endfor %}
+</table>
+
+<!--{% for hit in res['hits']['hits'] %}
+
+<h2>-- {{hit['_source']['datagroup.data']}} --</h2>
+
+{% endfor %} -->
+
 {% endif %}
 </body>
 </html> 
