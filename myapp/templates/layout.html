@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MyApp</title>
+        <meta charset="utf-8">
+        <link href="{{ url_for('static', filename='css/TableStyle.css') }}" rel="stylesheet">
+
+
+    </head>
+    <body>
+        <h1>{{ test }}!</h1>
+        <h2> {{ test1 }}</h2>
+
+        {% if res %}
+			<!--{{res}}-->
+			<h1>YAY</h1>
+
+			<!-- Tag-Data Table -->
+            <table class="lib-data">
+				<thead>
+					<tr>
+						<th>Tag</th>
+						<th>Data</th>
+					</tr>
+				</thead>
+                
+				<tbody>
+					
+							
+							
+					{% for hit in res['hits']['hits'] %}		
+						<tr>
+							{% for check_flag in hit['_source']['datagroup'] %}
+								{% if check_flag['taggroup'] == test %}
+									<!-- Tag Column -->
+									<td>
+										
+										{% for doc in hit['_source']['record'] %}
+											{% for doc1 in doc['subfields'] %}						
+																
+												{% for doc_v in hit['_source']['datagroup'] %} 
+													{% if doc_v['value'] == doc1['data'] %} 
+														{{ doc['tag'] }} 
+													{% endif %}
+												{% endfor %}
+											{% endfor %}
+										{% endfor %}
+										
+									</td> 	
+									
+									
+									<!-- Data Column -->
+									<td>
+										{% for doc in hit['_source']['datagroup'] %} 
+											{{ doc['value'] }}
+										{% endfor %}
+									</td>
+								{% endif %}	
+							{% endfor %}
+						</tr>
+					
+					{% endfor %}
+				
+				</tbody>
+            </table>
+
+
+        {% endif %}
+    </body>
+</html>
